@@ -24,7 +24,7 @@ set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect) # определ
 bridge = CvBridge()  # От сюда брать изображение с камеры
  
 qr_debug = rospy.Publisher("/qr_debug", Image, queue_size=10) # Сюда можно опубликовать изобрадение
-image_color = rospy.Publisher("/Debuuuuuuuug",Image,queue_size=10) #  определить прокси для ROS-сервиса
+image_color = rospy.Publisher("/Debuuuuuuuug",Image,queue_size=10) #  Сюда можно опубликовать изобрадение
 
 
 colorQR = ''
@@ -70,7 +70,6 @@ def qr_check(data): # Функция для распознование QR код
         result = barcodes[0].data 
         colorQR = result
         cup = False
-        # draw rect and publish to topic
         #(x, y, w, h) = barcodes[0].rect
         #cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
         #qr_debug.publish(bridge.cv2_to_imgmsg(frame, 'bgr8'))
@@ -99,16 +98,16 @@ def colorDetect(data): # Функция для распознование цве
     _, red, hier = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)   #Red
     for c in red:
         try: # Red
-            x, y = 0, 0
+            #x, y = 0, 0
             moments = cv.moments(c, 1)
-            sum_y = moments['m01']
-            sum_x = moments['m10']
+            #sum_y = moments['m01']
+            #sum_x = moments['m10']
             sum_pixel = moments['m00']
             if sum_pixel > 4000:
                 color = 'red'
                 cup = False
-                y = int(sum_x / sum_pixel)*320//70
-                x = int(sum_y / sum_pixel)*240//70
+                #y = int(sum_x / sum_pixel)*320//70
+                #x = int(sum_y / sum_pixel)*240//70
                 #cv.putText(img, 'Red', (y, x), cv.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))     
                 #cv.drawContours(img, [c], 0, (193,91,154), 2)
         except:pass
@@ -117,16 +116,16 @@ def colorDetect(data): # Функция для распознование цве
     _, green, hier = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)   #Green
     for c in green:
         try:   # Green
-            x, y = 0, 0
+            #x, y = 0, 0
             moments = cv.moments(c, 1)
-            sum_y = moments['m01']
-            sum_x = moments['m10']
+            #sum_y = moments['m01']
+            #sum_x = moments['m10']
             sum_pixel = moments['m00']
             if sum_pixel > 4000:
                 cup = False
                 color = 'green'
-                y = int(sum_x / sum_pixel)*320//70
-                x = int(sum_y / sum_pixel)*240//70
+                #y = int(sum_x / sum_pixel)*320//70
+                #x = int(sum_y / sum_pixel)*240//70
                 #cv.putText(img, 'Green', (y, x), cv.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
                 #cv.drawContours(img, [c], 0, (193,91,154), 2)
         except:pass
@@ -136,16 +135,16 @@ def colorDetect(data): # Функция для распознование цве
     _, blue, hier = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)   #Blue
     for c in blue:
         try: # Blue
-            x, y = 0, 0
+            #x, y = 0, 0
             moments = cv.moments(c, 1)
-            sum_y = moments['m01']
-            sum_x = moments['m10']
+            #sum_y = moments['m01']
+            #sum_x = moments['m10']
             sum_pixel = moments['m00']
             if sum_pixel > 4000:
                 color = 'blue'
                 cup = False
-                y = int(sum_x / sum_pixel)*320//70
-                x = int(sum_y / sum_pixel)*240//70
+                #y = int(sum_x / sum_pixel)*320//70
+                #x = int(sum_y / sum_pixel)*240//70
                 #cv.putText(img, 'Blue', (y, x), cv.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
                 #cv.drawContours(img, [c], 0, (193,91,154), 2)
         except:pass
