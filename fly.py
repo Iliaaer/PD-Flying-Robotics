@@ -139,6 +139,10 @@ def colorDetect(data): # Функция для распознование цве
          Результаты возвращаются в структуре cv :: Moments.
          '''
             sum_pixel = moments['m00'] # https://docs.opencv.org/3.4/d8/d23/classcv_1_1Moments.html#ab8972f76cccd51af351cbda199fb4a0d
+          ''' Про moments
+           https://docs.opencv.org/master/dd/d49/tutorial_py_contour_features.html
+           https://robotclass.ru/tutorials/opencv-moments-color-object-search/ - и тут пример кода вроде как тоже с обьяснением как его используют 
+          '''
             if sum_pixel > 4000: # Если сумма пикселя в этом обекте больше 4000 то
                 color = 'red' # Сохраням цвет который он распознал
                 cup = False  # Изменяем на False, чтобы можно было понять что он распознал QR код
